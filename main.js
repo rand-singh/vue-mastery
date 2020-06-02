@@ -224,7 +224,8 @@ Vue.component("product-review", {
         this.review = null;
         this.rating = null;
       } else {
-        this.errors = [];
+        this.errors.length = 0;
+
         if (!this.name) this.errors.push("Name required.");
         if (!this.review) this.errors.push("Review required.");
         if (!this.rating) this.errors.push("Rating required.");
