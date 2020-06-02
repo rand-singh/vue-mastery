@@ -91,3 +91,8 @@ textarea {
 .variants p {
   cursor: pointer;
 }
+
+button {
+  cursor: pointer;
+  outline: none;
+}
