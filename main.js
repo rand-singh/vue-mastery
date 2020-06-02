@@ -4,7 +4,7 @@ var app = new Vue({
     brand: "Vue Mastery",
     product: "Socks",
     description: "A pair of warm, fuzzy socks",
-    image: "./vmSocks-green-onWhite.jpg",
+    selectedVariant: 0,
     inventory: 100,
     inStock: true,
     onSale: false,
@@ -43,8 +43,8 @@ var app = new Vue({
     addToCart() {
       this.cart += 1;
     },
-    updateProduct(variantImage) {
-      this.image = variantImage;
+    updateProduct(index) {
+      this.selectedVariant = index;
     },
     removeFromCart() {
       this.cart -= 1;
@@ -55,6 +55,9 @@ var app = new Vue({
     title() {
       //   return this.brand + " " + this.product;
       return `${this.brand} ${this.product}`;
+    },
+    image() {
+      return this.variants[this.selectedVariant].variantImage;
     },
   },
 });
