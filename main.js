@@ -6,7 +6,6 @@ var app = new Vue({
     description: "A pair of warm, fuzzy socks",
     selectedVariant: 0,
     inventory: 100,
-    inStock: true,
     onSale: false,
     strikeClass: "strike",
     details: ["80% Cotton", "20% polyester", "Gender neutral"],
@@ -15,11 +14,13 @@ var app = new Vue({
         variandId: 2234,
         variantColor: "green",
         variantImage: "./vmSocks-green-onWhite.jpg",
+        variantQuantity: 10,
       },
       {
         variantId: 2235,
         variantColor: "blue",
         variantImage: "./vmSocks-blue-onWhite.jpg",
+        variantQuantity: 0,
       },
     ],
     sizes: [
@@ -58,6 +59,14 @@ var app = new Vue({
     },
     image() {
       return this.variants[this.selectedVariant].variantImage;
+    },
+    inStock() {
+      return this.variants[this.selectedVariant].variantQuantity;
+    },
+    sale() {
+      if (this.onSale) {
+        return `${this.brand} ${this.product} are on sale!`;
+      }
     },
   },
 });
