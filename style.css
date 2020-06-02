@@ -97,3 +97,7 @@ button {
   cursor: pointer;
   outline: none;
 }
+
+.strike {
+  text-decoration: line-through;
+}
