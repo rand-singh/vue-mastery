@@ -53,9 +53,10 @@ Vue.component("product", {
         <p v-if="!reviews.length">There are no reviews yet.</p>        
         <ul>
             <li v-for="review in reviews">
-                <p>{{review.name }}</p>
-                <p>{{review.rating }}</p>
-                <p>{{review.review }}</p>
+                <p>{{ review.name }}</p>
+                <p>{{ review.rating }}</p>
+                <p>{{ review.review }}</p>
+                <p>{{ review.recommend }}</p>
             </li>
         </ul>
     </div>
@@ -197,6 +198,15 @@ Vue.component("product-review", {
             </select>
         <p>
 
+        <p>Would you recommend this product?</p>
+        <p>                    
+            <label for="yes">yes</label><br>
+            <input type="radio" id="yes" name="recommend" value="yes" v-model="recommend">
+
+            <label for="no">no</label><br>
+            <input type="radio" id="no" name="recommend" value="no" v-model="recommend">            
+        </p>
+
         <p>
             <input type="submit" value="Submit">
         </p>
@@ -207,28 +217,33 @@ Vue.component("product-review", {
       name: null,
       review: null,
       rating: null,
+      recommend: null,
       errors: [],
     };
   },
 
   methods: {
     onSubmit() {
-      if (this.name && this.review && this.rating) {
+      console.log(this.recommend);
+      if (this.name && this.review && this.rating && this.recommend) {
         let productReview = {
           name: this.name,
           review: this.review,
           rating: this.rating,
+          recommend: this.recommend,
         };
         this.$emit("review-submitted", productReview);
         this.name = null;
         this.review = null;
         this.rating = null;
+        this.recommend = null;
       } else {
         this.errors.length = 0;
 
         if (!this.name) this.errors.push("Name required.");
         if (!this.review) this.errors.push("Review required.");
         if (!this.rating) this.errors.push("Rating required.");
+        if (!this.recommend) this.errors.push("recommend opinion required.");
       }
     },
   },
