@@ -42,9 +42,7 @@ Vue.component("product", {
       </button>
       <button v-on:click="removeFromCart" v-if="cart >= 1">Remove</button>
 
-      <div class="cart">
-        <p>Cart({{cart}})</p>
-      </div>
+
     </div>
   </div>
     `,
@@ -61,7 +59,7 @@ Vue.component("product", {
       details: ["80% Cotton", "20% polyester", "Gender neutral"],
       variants: [
         {
-          variandId: 2234,
+          variantId: 2234,
           variantColor: "green",
           variantImage: "./vmSocks-green-onWhite.jpg",
           variantQuantity: 10,
@@ -70,7 +68,7 @@ Vue.component("product", {
           variantId: 2235,
           variantColor: "blue",
           variantImage: "./vmSocks-blue-onWhite.jpg",
-          variantQuantity: 0,
+          variantQuantity: 9,
         },
       ],
       sizes: [
@@ -93,7 +91,7 @@ Vue.component("product", {
 
   methods: {
     addToCart() {
-      this.cart += 1;
+      this.$emit("add-to-cart", this.variants[this.selectedVariant].variantId);
     },
     updateProduct(index) {
       this.selectedVariant = index;
@@ -147,5 +145,11 @@ var app = new Vue({
   el: "#app",
   data: {
     premium: true,
+    cart: [],
+  },
+  methods: {
+    updateCart(id) {
+      this.cart.push(id);
+    },
   },
 });
